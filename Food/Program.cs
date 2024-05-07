@@ -1,3 +1,7 @@
+using Food.Models;
+using Microsoft.EntityFrameworkCore;
+
+
 namespace Food
 {
     public class Program
@@ -8,7 +12,11 @@ namespace Food
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<ModelContext>(x => x.UseOracle(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+            // builder.Services.AddDistributedMemoryCache();
 
+            builder.Services.AddSession(options =>options.IdleTimeout = TimeSpan.FromMinutes(30));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -21,10 +29,11 @@ namespace Food
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.MapControllerRoute(
                 name: "default",

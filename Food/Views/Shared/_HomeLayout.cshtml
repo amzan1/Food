@@ -1,4 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@*
+@{
+    var httpContext = ViewContext.HttpContext;
+}
+*@
+@using Microsoft.AspNetCore.Http
+
+@{
+    var userId = Context.Session.GetString("UserId");
+    var chefId = Context.Session.GetString("ChefId");
+    var userName = Context.Session.GetString("UserName");
+
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Foody &mdash; Onepage Website Template by Free-Template.co</title>
@@ -17,6 +31,7 @@
     <link rel="stylesheet" href="~/Home/css/animate.css">
     <link rel="stylesheet" href="~/Home/css/owl.carousel.min.css">
     <link rel="stylesheet" href="~/Home/css/aos.css">
+    <link href="~/Admin/assets/css/themify-icons.css" rel="stylesheet">
 
     <link rel="stylesheet" href="~/Home/css/magnific-popup.css">
 
@@ -27,6 +42,14 @@
 
     <!-- Theme Style -->
     <link rel="stylesheet" href="~/Home/css/style.css">
+
+    <style>
+        #logout:hover{
+            background-color:white;
+        }
+    </style>
+
+    
 </head>
 <body>
 
@@ -58,16 +81,87 @@
                             <a class="nav-link" asp-controller="Home" asp-action="About">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="News">News</a>
-                        </li>
-                    </ul>
-
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item cta-btn">
                             <a class="nav-link" asp-controller="Home" asp-action="Contact">Contact Us</a>
                         </li>
                     </ul>
 
+                    
+                    @*
+                    @if (httpContext.Session.GetInt32("UserId") == null)
+                    {
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item cta-btn nav-link">
+                                <p>
+                                    <a asp-controller="LoginAndRegister" asp-action="Register">Signup</a>
+                                    <a asp-controller="LoginAndRegister" asp-action="Login">| Login</a>
+                                </p>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item cta-btn nav-link">
+                                <p>
+                                    <a>
+                                        <i class="ti-user"></i>
+                                        Hi @httpContext.Session.GetString("UserName")
+                                    </a>
+                                    <a asp-controller="LoginAndRegister" asp-action="Logout">| Logout</a>
+                                </p>
+                            </li>
+                        </ul>
+                    }
+                    *@
+
+                    @if (userId != null)
+                    {
+                        <ul class="navbar-nav ml-auto">
+
+                            <li class="nav-item cta-btn  dropdown">
+                                <a class="nav-link dropdown-toggle" asp-controller="" asp-action="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="ti-user"></i>
+                                    Hi @userName
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" id="logout" asp-controller="LoginAndRegister" asp-action="Logout">Logout</a>
+                                    <a class="dropdown-item" id="logout" asp-controller="Home" asp-action="Profile">Profile</a>
+
+
+                                </div>
+                            </li>
+                        </ul>
+                    }
+                    else if (chefId != null)
+                    {
+                        <ul class="navbar-nav ml-auto">
+
+                            <li class="nav-item cta-btn  dropdown">
+                                <a class="nav-link dropdown-toggle" asp-controller="" asp-action="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="ti-user"></i>
+                                    Hi @userName
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" id="logout" asp-controller="LoginAndRegister" asp-action="Logout">Logout</a>
+                                    <a class="dropdown-item" id="logout" asp-controller="Home" asp-action="Profile">Profile</a>
+
+
+                                </div>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item cta-btn nav-link">
+                                <p>
+                                    <a asp-controller="LoginAndRegister" asp-action="Register">Signup</a>
+                                    <a asp-controller="LoginAndRegister" asp-action="Login">| Login</a>
+                                </p>
+                            </li>
+                        </ul>
+                    }
                 </div>
             </div>
         </nav>

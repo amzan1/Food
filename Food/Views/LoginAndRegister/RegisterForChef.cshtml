@@ -7,10 +7,10 @@
 <section class="signup">
     <div class="container">
         <div class="signup-content">
-            <form asp-action="Register"  method="POST" id="signup-form" class="signup-form">
+            <form asp-action="RegisterForChef" method="POST" id="signup-form" class="signup-form">
                 <h2 class="form-title">Create account</h2>
 
-              
+
                 <div class="form-group">
                     <input type="text" class="form-input" asp-for="FName" type="text" placeholder="First Name" />
                 </div>
@@ -25,26 +25,28 @@
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-input" name="Password" id="password" placeholder="Password" />
-                    <span toggle="#password" class="zmdi  field-icon toggle-password"></span>
+                    <span toggle="#password" class="zmdi field-icon toggle-password"></span>
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repeat your password" />
                 </div>
-                
+                <div class="form-group">
+                    <input asp-for="ImageFile" class="form-input" />
+                    <span asp-validation-for="ImagePath"></span>
+
+                </div>
                 <div class="form-group">
                     <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up" />
                 </div>
-                <div asp-validation-summary="All" class="text-danger"></div>
-
             </form>
             <p style="text-align:center;">
-                <a asp-controller="LoginAndRegister" asp-action="RegisterForChef" class="loginhere-link">Register as a chef</a>
+                <a asp-controller="LoginAndRegister" asp-action="Register" class="loginhere-link">Register as a user</a>
             </p>
 
             <p class="loginhere">
                 Have already an account ? <a asp-controller="LoginAndRegister" asp-action="Login" class="loginhere-link">Login here</a>
             </p>
-           
+
         </div>
     </div>
 </section>
