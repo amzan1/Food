@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Food.Models.Homepage>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="header">
+                        <h4 class="title">Categories</h4>
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Section Name</th>
+                                    <th>Image1</th>
+                                    <th>Image2</th>
+                                    <th>Image3</th>
+                                    <th>Image4</th>
+                                    <th>Paragraph1</th>
+                                    <th>Paragraph2</th>
+                                    <th>Paragraph3 </th>
+                                    <th>Paragraph4</th>
+                                    <th>Address</th>
+                                    <th>Email</th>
+                                    <th>Phone Number</th>
+                                    <th>Link1</th>
+                                    <th>Link2</th>
+                                    <th>Link3</th>
+                                    <th> Link4</th>
+                                    <th>Link5</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.CategoryName</td>
+                                        <td><img src=@Url.Content("~/Images/" + item.ImagePath) width="120px" height="100px" style="border-radius:30px;" /></td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info btn-fill btn-wd">Edit</a> |
+                                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                               
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h2>Index</h2>
+

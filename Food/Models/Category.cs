@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Food.Models;
 
@@ -10,6 +11,7 @@ public partial class Category
     public string? CategoryName { get; set; }
 
     public string? ImagePath { get; set; }
-
+    [NotMapped]
+    public IFormFile? ImageFile { get; set; }
     public virtual ICollection<Recipe> Recipes { get; set; } = new List<Recipe>();
 }

@@ -1,0 +1,121 @@
+﻿@model IEnumerable<Food.Models.Recipe>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+@using Microsoft.AspNetCore.Http
+
+@{
+    var roleId = Context.Session.GetInt32("RoleId");
+   
+
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="header">
+                        <h4 class="title">Recipe requests</h4>
+                        <p class="category">You will receive recipe requests from chefs</p>
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Duration</th>
+                                    <th>Created</th>
+                                    <th>Status</th>
+                                    <th>Price</th>
+                                    <th>Ingredients</th>
+                                    <th>Preparation</th>
+                                    <th>Image</th>
+                                    <th>Category</th>
+                                    <th>Chef</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    @if (item.RecipeStatus != "Accepted" && item.RecipeStatus != "Rejected")
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.RecipepName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.RecipeTime)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.RecipeDate)
+                                            </td>
+                                            <td>
+                                                @if (roleId == 1)
+                                                {
+                                                    <form asp-controller="Admin" asp-action="UpdateStatus" method="post">
+                                                        <input type="hidden" name="id" value="@item.RecipeId" />
+                                                        <input type="hidden" name="status" value="Accepted" />
+                                                        <button type="submit"><i class="ti-check"></i></button>
+                                                    </form>
+                                                    <form asp-controller="Admin" asp-action="UpdateStatus" method="post">
+                                                        <input type="hidden" name="id" value="@item.RecipeId" />
+                                                        <input type="hidden" name="status" value="Rejected" />
+                                                        <button type="submit"><i class="ti-close"></i></button>
+                                                    </form>
+
+                                                }
+                                                else
+                                                {
+                                                    @item.RecipeStatus
+                                                }
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Price)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.RecipeIngredients)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.RecipePreparation)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Image1)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Chef.FName) @Html.DisplayFor(modelItem => item.Chef.LName)
+
+                                            </td>
+                                            @if (roleId == 2)
+                                            {
+                                                <td>
+                                                    <a asp-action="Edit" asp-route-id="@item.RecipeId">Edit</a> |
+                                                    <a asp-action="Details" asp-route-id="@item.RecipeId">Details</a> |
+                                                    <a asp-action="Delete" asp-route-id="@item.RecipeId">Delete</a>
+                                                </td>
+                                            }
+
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+        
+
+

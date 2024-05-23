@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Food.Models.JoinPurchases>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Purchase Table</h4>
+                        <p class="category">You will receive purchase from users</p>
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                        <table class="table table-striped">
+                            <thead>
+                            <th>Username</th>
+                            <th>Category name</th>
+                            <th>Recipe name</th>
+                            <th>Date of purchase</th>
+                            <th>Price</th>
+                            </thead>
+                            <tbody>
+                                @foreach(var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.UserLogin.Username</td>
+                                        <td>@item.Category.CategoryName</td>
+                                        <td>@item.Recipe.RecipepName</td>
+                                        <td>@item.Purchase.BayDate</td>
+                                        <td>@item.Recipe.Price</td>
+                                    </tr>
+                                    
+                                }
+                               
+                               
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

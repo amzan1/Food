@@ -1,0 +1,116 @@
+﻿@model IEnumerable<Food.Models.Recipe>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+@using Microsoft.AspNetCore.Http
+
+@{
+    var roleId = Context.Session.GetInt32("RoleId");
+
+
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header text-center">
+                        <form asp-action="AllRecipe">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <input type="date" name="startDate" class="form-control border-input" placeholder="Start Date" />
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <input type="date" name="endDate" class="form-control border-input" placeholder="End Date" />
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <input type="submit" value="Search" class="btn btn-default" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Duration</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Price</th>
+                                    <th>Ingredients</th>
+                                    <th>Preparation</th>
+                                    <th>Image</th>
+                                    <th>Category</th>
+                                    <th>Chef</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr>
+                                        <td>
+                                            @item.RecipepName
+                                        </td>
+                                        <td>
+                                            @item.RecipeTime
+                                        </td>
+                                        <td>
+                                            @item.RecipeDate
+                                        </td>
+                                        <td>
+                                            @item.RecipeStatus
+                                        </td>
+                                        <td>
+                                            @item.Price
+                                        </td>
+                                        <td>
+                                            @item.RecipeIngredients
+                                        </td>
+                                        <td>
+                                            @item.RecipePreparation
+                                        </td>
+                                        <td>
+                                            <img src="@Url.Content("~/Images/" + item.Image1) " width="30px" height="20px" />
+                                        </td>
+
+                                        <td>
+                                            @item.Category.CategoryName
+                                        </td>
+                                        <td>
+                                            @item.Chef.FName @item.Chef.LName
+
+                                        </td>
+                                        @if (roleId == 2)
+                                        {
+                                            <td>
+                                                <a asp-action="Edit" asp-route-id="@item.RecipeId">Edit</a> |
+                                                <a asp-action="Details" asp-route-id="@item.RecipeId">Details</a> |
+                                                <a asp-action="Delete" asp-route-id="@item.RecipeId">Delete</a>
+                                            </td>
+                                        }
+
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

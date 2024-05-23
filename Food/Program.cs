@@ -1,5 +1,6 @@
 using Food.Models;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 
 
 namespace Food
@@ -31,6 +32,8 @@ namespace Food
             app.UseStaticFiles();
             
             app.UseRouting();
+
+            StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
 
             app.UseAuthorization();
             app.UseSession();

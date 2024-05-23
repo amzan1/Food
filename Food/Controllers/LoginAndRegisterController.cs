@@ -28,7 +28,7 @@ namespace Food.Controllers
             if (ModelState.IsValid)
             {
 
-                user.ImagePath = "-";
+                user.ImagePath = "~/Images/default.webp";
                 _context.Add(user);
                 _context.SaveChanges();
 
@@ -56,42 +56,51 @@ namespace Food.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegisterForChef([Bind("UserId,FName,LName,Email,ImagePath")] User user, string userName, string Password)
+        public async Task<IActionResult> RegisterForChef(User user, string userName, string Password)
         {
-            if (ModelState.IsValid)
+            var userin = _context.UserLogins.Where(x=> x.Username == userName).SingleOrDefault();
+            if (userin == null)
             {
-                if (user.ImageFile != null)
+                if (ModelState.IsValid)
                 {
-                    string wwwrootPath = _webHostEnvironment.WebRootPath;
-                    string imageName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(user.ImageFile.FileName);
-                    string fullPath = Path.Combine(wwwrootPath + "/Images/", imageName);
-
-                    Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
-
-                    using (var fileStream = new FileStream(fullPath, FileMode.Create))
+                    try
                     {
-                        await user.ImageFile.CopyToAsync(fileStream);
+                        if (user.ImageFile != null)
+                        {
+                            string wwwrootPath = _webHostEnvironment.WebRootPath;
+                            string imageName = Guid.NewGuid().ToString() + "_" + user.ImageFile.FileName;
+                            string fullPath = Path.Combine(wwwrootPath + "/Images/", imageName);
+
+
+                            using (var fileStream = new FileStream(fullPath, FileMode.Create))
+                            {
+                                await user.ImageFile.CopyToAsync(fileStream);
+                            }
+                            user.ImagePath = imageName;
+                        }
+                        else
+                        {
+                            user.ImagePath = "~/Images/default.webp";
+                        }
+                   
+                        _context.Add(user);
+                        await _context.SaveChangesAsync();
+
+                        UserLogin userLogin = new UserLogin();
+                        userLogin.Username = userName;
+                        userLogin.Password = Password;
+                        userLogin.UserId = user.UserId;
+                        userLogin.RoleId = 2;
+
+                        _context.Add(userLogin);
+                        await _context.SaveChangesAsync();
+
+                        return RedirectToAction("Login", "LoginAndRegister");
                     }
-                    user.ImagePath = imageName;
+                    catch (Exception ex) { }
                 }
-                else
-                {
-                    user.ImagePath = "~/Images/default.png";
-                }
-                _context.Add(user);
-                await _context.SaveChangesAsync();
-
-                UserLogin userLogin = new UserLogin();
-                userLogin.Username = userName;
-                userLogin.Password = Password;
-                userLogin.UserId = user.UserId;
-                userLogin.RoleId = 2;
-
-                _context.Add(userLogin);
-                await _context.SaveChangesAsync();
-
-                return RedirectToAction("Login", "LoginAndRegister");
             }
+            ModelState.AddModelError("", "Username already exist");
             return View();
             
         }
@@ -114,6 +123,8 @@ namespace Food.Controllers
                     case 1:
                         HttpContext.Session.SetInt32("AdminId", (int)user.UserId);
                         HttpContext.Session.SetString("AdminName", user.Username);
+                        HttpContext.Session.SetInt32("RoleId", (int)user.RoleId);
+
 
                         return RedirectToAction("Index","Admin");
 

@@ -306,7 +306,8 @@ public partial class ModelContext : DbContext
                 .HasDefaultValueSql("'pending'")
                 .HasColumnName("RECIPE_STATUS");
             entity.Property(e => e.RecipeTime)
-                .HasPrecision(6)
+                .HasMaxLength(250)
+                .IsUnicode(false)
                 .HasColumnName("RECIPE_TIME");
             entity.Property(e => e.RecipepName)
                 .HasMaxLength(50)
@@ -483,7 +484,8 @@ public partial class ModelContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("CVV");
             entity.Property(e => e.ExpirationDate)
-                .HasColumnType("DATE")
+                .HasMaxLength(250)
+                .IsUnicode(false)
                 .HasColumnName("EXPIRATION_DATE");
             entity.Property(e => e.UserId)
                 .HasColumnType("NUMBER(38)")

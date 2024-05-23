@@ -30,8 +30,10 @@
     <!--  Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <link href="~/Admin/assets/css/themify-icons.css" rel="stylesheet">
-
+    <!-- SweetAlert-->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -58,7 +60,7 @@
                         </a>
                     </li>
                     <li>
-                        <a asp-controller="Admin" asp-action="User">
+                        <a asp-controller="Admin" asp-action="AdminProfile">
                             <i class="ti-user"></i>
                             <p>User Profile</p>
                         </a>
@@ -69,21 +71,45 @@
                             <p>Table List</p>
                         </a>
                     </li>
-                    @*<li>
-                        <a href="typography.html">
-                            <i class="ti-text"></i>
-                            <p>Typography</p>
+                    <li>
+                        <a asp-controller="Categories" asp-action="index">
+                            <i class="ti-view-list-alt"></i>
+                            <p>Categories</p>
                         </a>
                     </li>
-                    *@
-                    
+                    <li>
+                        <a asp-controller="Recipes" asp-action="index">
+                            <i class="ti-receipt"></i>
+                            <p>Requests</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Recipes" asp-action="AllRecipe">
+                            <i class="ti-receipt"></i>
+                            <p>Recipes</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Testimonials" asp-action="RequestTest">
+                            <i class="ti-export"></i>
+                            <p>Testimonia request</p>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-controller="Admin" asp-action="Reports">
+                            <i class="ti-export"></i>
+                            <p>Reports</p>
+                        </a>
+                    </li>
                     
                     <li>
-                        <a asp-controller="Admin" asp-action="Maps">
+                        <a asp-controller="Admin" asp-action="Purchase">
                             <i class="ti-map"></i>
-                            <p>Maps</p>
+                            <p>Purchase</p>
                         </a>
                     </li>
+                    
                     <li>
                         <a asp-controller="Admin" asp-action="Notifications">
                             <i class="ti-bell"></i>
@@ -130,13 +156,11 @@
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="ti-bell"></i>
-                                    <p class="notification">5</p>
-                                    <p>Notifications</p>
+                                    <p> Manage pages</p>
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Notification 1</a></li>
+                                    <li><a asp-controller="HomePages" asp-action="index"><p>Home Pages</p></a></li>
                                     <li><a href="#">Notification 2</a></li>
                                     <li><a href="#">Notification 3</a></li>
                                     <li><a href="#">Notification 4</a></li>
@@ -212,21 +236,7 @@
 <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 <script src="~/Admin/assets/js/demo.js"></script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
 
-        demo.initChartist();
-
-        $.notify({
-            icon: 'ti-gift',
-            message: "Welcome to <b>Paper Dashboard</b> - a beautiful Bootstrap freebie for your next project."
-
-        }, {
-            type: 'success',
-            timer: 4000
-        });
-
-    });
-</script>
-
+<!-- SweetAlert-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </html>

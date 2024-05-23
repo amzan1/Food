@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Food.Models;
 
@@ -9,7 +10,7 @@ public partial class Recipe
 
     public string RecipepName { get; set; } = null!;
 
-    public DateTime RecipeTime { get; set; }
+    public string RecipeTime { get; set; } = null!;
 
     public DateTime? RecipeDate { get; set; }
 
@@ -25,7 +26,10 @@ public partial class Recipe
 
     public string RecipePreparation { get; set; } = null!;
 
-    public string Image1 { get; set; } = null!;
+    public string? Image1 { get; set; }
+    [NotMapped]
+    public IFormFile? ImageFile { get; set; }
+
 
     public string? Image2 { get; set; }
 

@@ -13,7 +13,7 @@ public partial class Visa
 
     public string CardHolderName { get; set; } = null!;
 
-    public DateTime ExpirationDate { get; set; }
+    public string ExpirationDate { get; set; } = null!;
 
     public string Cvv { get; set; } = null!;
 

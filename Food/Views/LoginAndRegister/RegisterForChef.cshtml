@@ -7,7 +7,7 @@
 <section class="signup">
     <div class="container">
         <div class="signup-content">
-            <form asp-action="RegisterForChef" method="POST" id="signup-form" class="signup-form">
+            <form asp-action="RegisterForChef" enctype="multipart/form-data" method="POST" id="signup-form" class="signup-form">
                 <h2 class="form-title">Create account</h2>
 
 
@@ -31,14 +31,15 @@
                     <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repeat your password" />
                 </div>
                 <div class="form-group">
-                    <input asp-for="ImageFile" class="form-input" />
-                    <span asp-validation-for="ImagePath"></span>
+                    <input type="file" asp-for="ImageFile" class="form-input" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
 
                 </div>
                 <div class="form-group">
                     <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up" />
                 </div>
             </form>
+
             <p style="text-align:center;">
                 <a asp-controller="LoginAndRegister" asp-action="Register" class="loginhere-link">Register as a user</a>
             </p>

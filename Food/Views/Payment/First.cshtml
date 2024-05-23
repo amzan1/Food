@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Recipe>
+
+@{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<table>
+    @foreach(var item in Model)
+    {
+        <tr>
+        <td>@item.RecipepName</td>
+    </tr> 
+    }
+   
+</table>
+
+<p>
+    <a asp-controller="Payment" asp-action="Pay">Pay</a>
+</p>

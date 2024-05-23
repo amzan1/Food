@@ -1,0 +1,121 @@
+﻿@model Recipe
+@{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+
+
+<div class="slider-wrap no-slanted">
+    <div class="slider-item">
+
+        <div class="container">
+            <div class="row slider-text align-items-center justify-content-center">
+                <div class="col-md-8 text-center col-sm-12 ">
+                    <h1 data-aos="fade-up">Contact Foody</h1>
+                    <p class="mb-5" data-aos="fade-up" data-aos-delay="100">Handcrafted with love by <a href="https://free-template.co" target="_blank">Free-Template.co</a></p>
+                    <p data-aos="fade-up" data-aos-delay="200"><a href="#" class="btn btn-white btn-outline-white">Get Started</a></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- END slider -->
+</div>
+
+
+<section class="section bg-light pt-0 top-slant-white">
+
+    <div class="clearfix mb-5 pb-5">
+        <div class="container-fluid">
+            <div class="row" data-aos="fade">
+                <div class="col-md-12 text-center heading-wrap">
+                    <h2>The Checkout</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+
+    <div class='container1'>
+        <div class='window'>
+            <div class='order-info'>
+                <div class='order-info-content'>
+                    <h2 class="h2">Order Summary</h2>
+                    <div class='line'></div>
+                    <table class='order-table'>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <img src=@Url.Content("~/Images/" + Model.Image1) class='full-width'/>
+                                    
+                                </td>
+                                <td>
+                                    <br> <span class='thin'>Recipe Name: @Model.RecipepName</span>
+                                    <br />
+                                    <span class='thin small'>Category Name: @Model.Category.CategoryName<br><br></span>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class='price'>$ @Model.Price</div>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <div class='line'></div>
+                    <div class='total'>
+                        <span style='float:left;'>
+                            <div class='thin dense'>VAT 15%</div>
+                            TOTAL
+                        </span>
+                        <span style='float:right; text-align:right;'>
+                             @if (Model.Price != null) 
+                                { var PriceWithVat = (Model.Price * 15) / 100;
+                            <div class='thin dense'>
+                                    $ @PriceWithVat
+                                </div>
+                                var total = Model.Price + PriceWithVat;
+
+                                <div>$ @total</div>
+                            }
+                            
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class='credit-info'>
+                <div class='credit-info-content'>
+                    <img src="~/Home/img/VISA.png" height="80" class="credit-card-image" id="credit-card-image" />
+                    <form asp-action="CheckOut">
+
+                    Card Number
+                        <input name="CardNumber" class='input-field'/>
+                    Card Holder
+                        <input name="CardHolderName" class='input-field'/>
+                        <table class='half-input-table'>
+                            <tr>
+                                <td>
+                                    Expires
+                                    <input name="ExpirationDate" class='input-field' />
+                                </td>
+                                <td>
+                                    CVC
+                                    <input name="Cvv" class='input-field'/>
+                                </td>
+                            </tr>
+                        </table>
+                        <button class='pay-btn'>Checkout</button>
+
+                    </form>
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>

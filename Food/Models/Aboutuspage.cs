@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Food.Models;
 
+
 public partial class Aboutuspage
 {
     public decimal Id { get; set; }

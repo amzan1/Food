@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Recipe>
+@{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+
+<div class="slider-wrap">
+    <div class="slider-item" style="background-image: url('img/hero_1.jpg');">
+
+        <div class="container">
+            <div class="row slider-text align-items-center justify-content-center">
+                <div class="col-md-8 text-center col-sm-12 ">
+                    <h1 data-aos="fade-up">Foody Recipes</h1>
+                    <p class="mb-5" data-aos="fade-up" data-aos-delay="100">Handcrafted with love by <a href="https://free-template.co" target="_blank">Free-Template.co</a></p>
+                    <p data-aos="fade-up" data-aos-delay="200"><a href="#" class="btn btn-white btn-outline-white">Get Started</a></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- END slider -->
+</div>
+
+
+
+<section class="section bg-light pt-0 bottom-slant-gray">
+
+    <div class="clearfix mb-5 pb-5">
+        <div class="container-fluid">
+            <div class="row" data-aos="fade">
+                <div class="col-md-12 text-center heading-wrap">
+                    <h2>Our Recipes</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+
+            @foreach (var item in Model)
+            {
+                @if (item.RecipeStatus == "Accepted")
+                {
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="blog d-block">
+                            <a class="bg-image d-block" href="single.html" style="background-image: url('@Url.Content("~/Images/" + item.Image1)');"></a>
+                            <div class="text">
+                                <h3><a href="single.html">@item.RecipepName</a></h3>
+                                <p class="sched-time">
+                                    <span><span class="fa fa-calendar"></span> @item.RecipeDate</span> <br>
+                                </p>
+                                <p>@item.RecipePreparation</p>
+
+                                <p><a asp-controller="Home" asp-action="CheckOut" asp-route-id="@item.RecipeId" class="btn btn-primary btn-sm">Buy Now</a></p>
+
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+
+</section> <!-- .section -->

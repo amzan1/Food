@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 
 namespace Food.Models;
 
@@ -15,9 +13,11 @@ public partial class User
     public string LName { get; set; } = null!;
 
     public string Email { get; set; } = null!;
+
     public string? ImagePath { get; set; }
     [NotMapped]
     public IFormFile? ImageFile { get; set; }
+
 
     public virtual ICollection<Purchase> Purchases { get; set; } = new List<Purchase>();
 

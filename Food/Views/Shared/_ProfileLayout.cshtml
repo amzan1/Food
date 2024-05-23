@@ -37,6 +37,8 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="~/Admin/assets/css/themify-icons.css" rel="stylesheet">
+    <!-- SweetAlert-->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 
 </head>
 <body>
@@ -72,7 +74,7 @@
                         </a>
                     </li>
                     <li>
-                        <a asp-controller="" asp-action="">
+                        <a asp-controller="Recipes" asp-action="index">
                             <i class="ti-receipt"></i>
                             <p>Recipes</p>
                         </a>
@@ -81,7 +83,7 @@
                     @if (RoleId == 2)
                     {
                         <li>
-                            <a >
+                            <a asp-controller="Profile" asp-action="AddRecipe">
                                 <i class="ti-pencil-alt"></i>
                                 <p>Creat Recipes</p>
                             </a>
@@ -94,14 +96,14 @@
                             <p>LogOut</p>
                         </a>
                     </li>
-                    @*
+                    
                     <li class="active-pro">
-                    <a href="upgrade.html">
-                    <i class="ti-export"></i>
-                    <p>Upgrade to PRO</p>
-                    </a>
+                        <a asp-controller="Testimonials" asp-action="Create">
+                            <i class="ti-export"></i>
+                            <p>Add Testimonia</p>
+                        </a>
                     </li>
-                    *@
+                    
                 </ul>
             </div>
         </div>
@@ -202,7 +204,7 @@
 <script src="~/Admin/assets/js/bootstrap-notify.js"></script>
 
 <!--  Google Maps Plugin    -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"/>
 
 <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 <script src="~/Admin/assets/js/paper-dashboard.js"></script>
@@ -210,21 +212,8 @@
 <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 <script src="~/Admin/assets/js/demo.js"></script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
+<!-- SweetAlert-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        demo.initChartist();
-
-        $.notify({
-            icon: 'ti-gift',
-            message: "Welcome to <b>Paper Dashboard</b> - a beautiful Bootstrap freebie for your next project."
-
-        }, {
-            type: 'success',
-            timer: 4000
-        });
-
-    });
-</script>
 
 </html>

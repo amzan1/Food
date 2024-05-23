@@ -1,0 +1,47 @@
+﻿@model Food.Models.Category
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="header">
+                        <h4 class="title">Details</h4>
+                        <p class="category">@Model.CategoryName</p>
+                    </div>
+                    <div class="content table-responsive table-full-width">
+                        <table class="table table-hover">
+                            <thead>
+                            <th>Category Name</th>
+                            <th>Category Image</th>
+                            <ht></ht>
+                            </thead>
+                            <tbody>
+                                
+                                    <tr>
+                                        <td>@Model.CategoryName</td>
+                                        <td><img src=@Url.Content("~/Images/" + Model.ImagePath) width="120px" height="100px" style="border-radius:30px;" /></td>
+                                        
+                                    </tr>
+                                
+                                
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
